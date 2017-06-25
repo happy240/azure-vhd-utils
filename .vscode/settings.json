@@ -1,5 +1,5 @@
 {
-    "go.buildOnSave": true,
+    "go.buildOnSave": false,
     "go.lintOnSave": true,
     "go.vetOnSave": true,
     "go.buildTags": "",
@@ -12,7 +12,7 @@
     "go.formatOnSave": true, 
     "go.formatTool": "goreturns",
     "go.formatFlags": [],
-    "go.goroot": "/usr/local/go",
-    "go.gopath": "/Users/anuthomaschandy/go-workspace",
+    "go.goroot": "C:/go",
+    "go.gopath": "C:/Users/H/go",
     "go.gocodeAutoBuild": false
 }

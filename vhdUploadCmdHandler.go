@@ -51,6 +51,10 @@ func vhdUploadCmdHandler() cli.Command {
 				Name:  "overwrite",
 				Usage: "Overwrite the blob if already exists.",
 			},
+			cli.BoolFlag{
+				Name:  "environment",
+				Usage: "Choose target environment for AzureCloud or AzureChinaCloud.",
+			},
 		},
 		Action: func(c *cli.Context) error {
 			const PageBlobPageSize int64 = 2 * 1024 * 1024
@@ -106,7 +110,19 @@ func vhdUploadCmdHandler() cli.Command {
 			}
 			defer diskStream.Close()
 
-			storageClient, err := storage.NewBasicClient(stgAccountName, stgAccountKey)
+			var baseurl string
+			if c.IsSet("environment") {
+				switch c.String("environment") {
+				case "AzureChinaCloud":
+					baseurl = "core.chinacloudapi.cn"
+				default:
+					baseurl = storage.DefaultBaseURL
+				}
+			} else {
+				baseurl = storage.DefaultBaseURL
+			}
+			//Changed from calling NewBasicClient() to NewClient to support AzureChina.
+			storageClient, err := storage.NewClient(stgAccountName, stgAccountKey, baseurl, storage.DefaultAPIVersion, true)
 			if err != nil {
 				return err
 			}
