@@ -45,6 +45,7 @@ OPTIONS:
    --containername      Name of the container holding destination page blob. (Default: vhds)
    --blobname           Name of the destination page blob.
    --parallelism        Number of concurrent goroutines to be used for upload
+   --environment        Set target environment, "AzureChinaCloud" for Azure China. (Default: AzureCloud)
 ```
 
 The upload command uploads local VHD to Azure storage as page blob. Once uploaded, you can use Microsoft Azure portal to register an image based on this page blob and use it to create Azure Virtual Machines.
